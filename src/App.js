@@ -8,10 +8,46 @@ class App extends React.Component {
     todos: [],
     error: null,
     isLoaded: false,
-    items: []    
+    items: [],
+    
+    temp: 0,
+    desc: '',
+    icon: '',
+    loading: true,
+
+    courseTitle: '',
+    courses: []
   }
 
+
+
   componentDidMount() {
+
+    fetch('https://mock-public-api.ssg-wsg.sg/courses/directory')
+    .then(response => response.json())
+    .then(responseData => {
+      this.setState({
+//        courseTitle: responseData.data.courses[0].title
+          courses: responseData.data.courses
+
+      })
+      // console.log(this.state.courseTitle);
+    })
+    .catch(err => console.error(err));
+
+/*    
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=Singapore&units=Metric&APIkey=0118f6d52f346cba4d3b2d01011680f8')
+    .then(response => response.json())
+    .then(responseData => {
+      this.setState({
+        temp: responseData.main.temp,
+        desc: responseData.weather[0].description,
+        icon: responseData.weather[0].icon,
+        loading: false
+      })
+    })
+    .catch(err => console.error(err));
+*/
 
 //~~~ Axios ~~~    
 /*
@@ -33,25 +69,73 @@ class App extends React.Component {
       }
       );
 */
+
 //~~~ Fetch ~~~      
-    
+/*    
    fetch('http://jsonplaceholder.typicode.com/todos')
-    // fetch('https://mock-public-api.ssg-wsg.sg/courses/directory')
     .then(res => res.json())
     .then((data) => {
       this.setState({ todos: data })
       console.log(this.state.todos)
     })
     .catch(console.log)
-    
+*/  
   }  
 
   render() {
+
+    return(
+      <div className="container">
+        <h1>Courses@PDD</h1>
+
+        {this.state.courses.map((list) => (
+        <div className="card">
+          <div className="card-body">
+            <h4 className="card-title">{list.title}</h4>
+            <h5 className="card-subtitle mb-2 text-muted">
+              {list.trainingProviderAlias}
+            </h5>
+            <h6 className="card-text sm-6">
+              {list.objective}
+            </h6>
+            <button color='blue'>Register</button>
+          </div>
+        </div>
+        ))}
+
+
+      </div>
+    );
+
+
+  }
+}
+
+export default App;
+
+
+//~~~ OpenWeatherMap.Org ~~~
+/*
+    const imgSrc = 'http://openweathermap.org/img/w/' + 
+                    this.state.icon + '.png';
+    
+    if (this.state.loading) {
+      return <p>Loading</p>
+    }
+    else{
+      return (
+        <div className='App'>
+          
+        </div>
+      );
+    }
+
+    
     return (
       <div className="container">
       <div className="col-xs-12">
       <h1>Jobs@PDD</h1>
-      
+
       {this.state.todos.map((todo) => (
         <div className="card">
           <div className="card-body">
@@ -63,7 +147,7 @@ class App extends React.Component {
               </span>
             }
             { !todo.completed &&
-              <span>
+   œ           <span>
                 Pending
               </span>
             }              
@@ -76,10 +160,8 @@ class App extends React.Component {
       </div>
      </div>
     );
-  }
-}
+*/
 
-export default App;
 
 /*
       {this.state.items.map(todo => ( 
@@ -118,23 +200,4 @@ export default App;
       </div>
      </div>
 
-*/
-
-/*
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
 */

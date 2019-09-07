@@ -11,6 +11,7 @@ This app will allow residents and visitors to Punggol Digital District to search
 ## How I built it
 
 This project uses ReactJS, for the Punggol Digital District hackathon 2019 (https://www.pddhack.sg/).
+Reference dataset from SkillsFuture SG "https://developer.ssg-wsg.sg/webapp/api-discovery".
  
 ## Quick start
 

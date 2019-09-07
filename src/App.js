@@ -1,7 +1,8 @@
 import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
+// import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class App extends React.Component {
   state = {
@@ -82,6 +83,10 @@ class App extends React.Component {
 */  
   }  
 
+  btnRegisterClicked = (event) => {
+    console.log("clicked");
+  }
+
   render() {
 
     return(
@@ -98,7 +103,10 @@ class App extends React.Component {
             <h6 className="card-text sm-6">
               {list.objective}
             </h6>
-            <button color='blue'>Register</button>
+
+            <Link to="/list">
+            <button className="btn-block" onClick={this.btnRegisterClicked}>Register</button>
+            </Link>            
           </div>
         </div>
         ))}
@@ -113,6 +121,7 @@ class App extends React.Component {
 
 export default App;
 
+//            <button className="btn-block" color='blue' onClick={this.btnRegisterClicked}>Register</button>
 
 //~~~ OpenWeatherMap.Org ~~~
 /*
